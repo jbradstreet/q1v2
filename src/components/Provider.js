@@ -9,19 +9,27 @@ class Provider extends Component {
     super();
 
     this.state = {
-      shows: []
+      shows: [],
+      episodes: []
     };
   }
 
   componentDidMount() {
     // const { params } = this.props.match;
-    // axios.get(`https://api.themoviedb.org/3/search/tv?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US&page=1&query=${params.tvShow}`)
-
+    // axios.get(`https://api.themoviedb.org/3/search/tv?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US&page=1&query=${params.tvShow}`) // this works to get user input on search
     axios.get(`https://api.themoviedb.org/3/search/tv?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US&page=1&query=glow`) // static for now, passing down to TVShows
+
+    // axios.get(`https://api.themoviedb.org/3/tv/70573/season/1?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US`) // static, passing down to Episodes
+
       .then(response => {
         this.setState({ shows: response.data.results });
         console.log('Provider - state:', this.state.shows);
       })
+      //  this is to get the episodes
+      // .then(response => {
+      //   this.setState({ episodes: response.data.episodes });
+      //   console.log('Provider - state:', this.state.episodes);
+      // })
       .catch(error => {
         console.log(error);
       })
@@ -37,6 +45,7 @@ class Provider extends Component {
     return (
       <div>
         <TVShows data={this.state.shows} />
+        {/* <Episodes data={this.state.episodes} /> */}
       </div>
     );
   }

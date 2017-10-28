@@ -19,7 +19,7 @@ const Root = () => {
         <Route path="/" exact component={App} />
         {/* <Route  component={NotFound} /> */}
         <Route path="/tvshows/:tvShow" exact component={Provider} />
-        <Route path="/episodes/:tvShowID/season1" exact component={Episodes} />
+        <Route path="/episodes/:tvShow" exact component={Episodes} />
       </div>
     </Router>
   );

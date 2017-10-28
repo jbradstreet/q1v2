@@ -13,7 +13,7 @@ class TVShowPicker extends Component {
       userInput: this.showInput.value
     }
     console.log(`Input from TVShowPicker - ${tvShow.userInput}!`);
-    this.props.history.push(`/TVshow/${tvShow.userInput}`)
+    this.props.history.push(`/tvshows/${tvShow.userInput}`)
   }
 
 
