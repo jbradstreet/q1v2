@@ -5,9 +5,8 @@ import './App.css';
 class Episodes extends Component {
 
   render() {
-    console.log('Episodes - props:', this.props);
-
     const { data } = this.props;
+
     const episodes = data.map((episodes, index) => {
       return(
         <div key={index}>
@@ -26,10 +25,19 @@ class Episodes extends Component {
         <header className="App-header">
           <h1 className="App-title">Here are the Episodes!</h1>
         </header>
-          <p>{episodes}</p>
+          { episodes.length > 0  ?
+            (<span>
+              <h3>Episodes loaded!</h3>
+              {episodes}
+            </span>)
+            : <h3>Nothing yet</h3>
+          }
       </div>
     );
   }
 }
 
 export default Episodes;
+
+// sanity check
+// console.log('Episodes - props:', this.props);

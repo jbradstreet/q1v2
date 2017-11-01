@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './App.css';
 
-// only has a render method, can convert this to a functional component.
+// only has a render method, can convert this to a stateless functional component.
+
 class TVShows extends Component {
-    // get the url params, give that to Provider
-    // update params in Provider, get shows from Provider
-    // constructor() {
-    //   super();
-    //
-    //   this.state = {
-    //     params:''
-    //   };
-    // }
 
   render() {
-    console.log('TVShows - props:', this.props);
+    const { data, showId } = this.props;
 
-    const { data } = this.props;
     const shows = data.map((show, index) => {
       return(
         <div key={index}>
           <span>
-            <h3>{show.original_name}</h3>
+            <a onClick={ () => showId(show.id) } >
+              {show.original_name}
+            </a>
             <p>{show.overview ? show.overview : 'no overview provided'}</p>
           </span>
         </div>
@@ -40,3 +34,6 @@ class TVShows extends Component {
 }
 
 export default TVShows;
+
+// sanity check
+// console.log('TVShows - props:', this.props);

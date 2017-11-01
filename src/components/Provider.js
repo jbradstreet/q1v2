@@ -10,42 +10,53 @@ class Provider extends Component {
 
     this.state = {
       shows: [],
-      episodes: []
+      episodes: [],
+      id: '',
+      loading: false
     };
   }
 
+  // --!
+  // below will need to be asynchronous. These have tasks that have a "waiting" aspect,
+  // event driven. We need the code to "wait" until something happens before doing anything.
   componentDidMount() {
-    // const { params } = this.props.match;
-    // axios.get(`https://api.themoviedb.org/3/search/tv?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US&page=1&query=${params.tvShow}`) // this works to get user input on search
-    axios.get(`https://api.themoviedb.org/3/search/tv?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US&page=1&query=glow`) // static for now, passing down to TVShows
+    const { params } = this.props.match;
 
-    // axios.get(`https://api.themoviedb.org/3/tv/70573/season/1?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US`) // static, passing down to Episodes
-
+    axios.get(`https://api.themoviedb.org/3/search/tv?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US&page=1&query=${params.tvShow}`)
       .then(response => {
         this.setState({ shows: response.data.results });
         console.log('Provider - state:', this.state.shows);
       })
-      //  this is to get the episodes
-      // .then(response => {
-      //   this.setState({ episodes: response.data.episodes });
-      //   console.log('Provider - state:', this.state.episodes);
-      // })
       .catch(error => {
         console.log(error);
       })
   }
 
-  // TODO: logic below is what should go into TVShow component
-  render() {
+  handleClick(id) {
+    this.setState({ id: id, loading: true });
 
-    if(!this.state.shows) {
-      return <p>Getting data...</p>
+      axios.get(`https://api.themoviedb.org/3/tv/${id}/season/1?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US`)
+      .then(response => {
+        setTimeout(() => {
+          this.setState({ episodes: response.data.episodes, loading: false });
+        }, 3000)
+        console.log('Provider - state:', this.state.episodes);
+      })
+  }
+
+  render() {
+    const { loading } = this.state;
+
+    if (loading) {
+      return <h3>Loading...</h3>
     }
 
     return (
       <div>
-        <TVShows data={this.state.shows} />
-        {/* <Episodes data={this.state.episodes} /> */}
+        <TVShows data={this.state.shows} showId={ (id) => this.handleClick(id)} />
+        <Episodes
+          data={this.state.episodes}
+        />
       </div>
     );
   }
@@ -53,16 +64,3 @@ class Provider extends Component {
 }
 
 export default Provider;
-
-// this was in  `componentDidMount` before
-// use the map method to map each show into it's own div, store all of that in the `shows` variable.
-// const shows = response.data.results.map((show, index) => {
-//   return(
-//     <div key={index}>
-//       <span>
-//         <h3>{show.original_name}</h3>
-//         <p>{show.overview ? show.overview : 'no overview provided'}</p>
-//       </span>
-//     </div>
-//   )
-// })
