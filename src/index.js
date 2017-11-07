@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
 
 import App from './components/App';
-import TVShows from './components/TVShows';
+import TvShows from './components/TvShows';
 import Episodes from './components/Episodes';
 import registerServiceWorker from './registerServiceWorker';
 // import NotFound from './components/NotFound';
@@ -18,7 +18,7 @@ const Root = () => {
       <div>
         <Route path="/" exact component={App} />
         {/* <Route  component={NotFound} /> */}
-        <Route path="/tvshows/:tvShow" exact component={Provider} />
+        <Route path="/TvShows/:tvShow" exact component={Provider} />
         <Route path="/episodes/:tvShow" exact component={Episodes} />
       </div>
     </Router>

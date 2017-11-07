@@ -3,7 +3,7 @@ import { object } from 'prop-types';
 // import PropTypes from 'prop-types'; // needed this if I wanted to use `context`
 import { withRouter } from 'react-router-dom';
 
-class TVShowPicker extends Component {
+class TvShowPicker extends Component {
   //possibly need to make userInput a prop to pass down to Provider?
 
   goToEpisodes(event) {
@@ -12,8 +12,8 @@ class TVShowPicker extends Component {
     const tvShow = {
       userInput: this.showInput.value
     }
-    console.log(`Input from TVShowPicker - ${tvShow.userInput}!`);
-    this.props.history.push(`/tvshows/${tvShow.userInput}`)
+    console.log(`Input from TvShowPicker - ${tvShow.userInput}!`);
+    this.props.history.push(`/TvShows/${tvShow.userInput}`)
   }
 
 
@@ -33,11 +33,11 @@ class TVShowPicker extends Component {
 
 }
 
-TVShowPicker.propTypes = {
+TvShowPicker.propTypes = {
   router: object
 }
 
-export default withRouter(TVShowPicker);
+export default withRouter(TvShowPicker);
 
 
 // event = info being sent within `render()` on submit

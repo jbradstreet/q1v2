@@ -4,7 +4,7 @@ import './App.css';
 
 // only has a render method, can convert this to a stateless functional component.
 
-class TVShows extends Component {
+class TvShows extends Component {
 
   render() {
     const { data, showId } = this.props;
@@ -33,7 +33,7 @@ class TVShows extends Component {
   }
 }
 
-export default TVShows;
+export default TvShows;
 
 // sanity check
-// console.log('TVShows - props:', this.props);
+// console.log('TvShows - props:', this.props);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TVShowPicker from './TVShowPicker';
-import TVShows from './TVShows';
+import TvShowPicker from './TvShowPicker';
+import TvShows from './TvShows';
 import Episodes from './Episodes';
 import axios from 'axios';
 
@@ -53,7 +53,7 @@ class Provider extends Component {
 
     return (
       <div>
-        <TVShows data={this.state.shows} showId={ (id) => this.handleClick(id)} />
+        <TvShows data={this.state.shows} showId={ (id) => this.handleClick(id)} />
         <Episodes
           data={this.state.episodes}
         />
