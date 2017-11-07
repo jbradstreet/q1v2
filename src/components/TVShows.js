@@ -8,6 +8,7 @@ class TvShows extends Component {
 
   render() {
     const { data, showId } = this.props;
+    console.log('TvShows - props:', this.props);
 
     const shows = data.map((show, index) => {
       return(
