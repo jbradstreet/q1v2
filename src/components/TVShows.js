@@ -7,10 +7,10 @@ import './App.css';
 class TvShows extends Component {
 
   render() {
-    const { data, showId } = this.props;
+    const { showData, showId } = this.props;
     console.log('TvShows - props:', this.props);
 
-    const shows = data.map((show, index) => {
+    const shows = showData.map((show, index) => {
       return(
         <div key={index}>
           <span>

@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
+import EpisodeList from './EpisodeList';
 import './App.css';
 
-// only has a render method, can convert this to a functional component.
 class Episodes extends Component {
 
-  render() {
-    const { data } = this.props;
+  // eventually, move this list into the designated component
+  // need two functions, one to add items to localStorage, another to remove items
+  episodeArray = JSON.parse(localStorage.getItem('episodeList'));
 
-    const episodes = data.map((episodes, index) => {
+  handleEpisodeClick(item, event) {
+    let episodeArray = JSON.parse(localStorage.getItem('episodeList')) || []; // parse it to turn into object
+    episodeArray.push(item.name);
+    localStorage.setItem('episodeList', JSON.stringify(episodeArray)); // need to stringify to save it
+
+    console.log('episode array:', episodeArray);
+  }
+
+  render() {
+    const { episodeArray } = this;
+    const { episodeData } = this.props;
+
+    console.log('episodeArray:', episodeArray);
+
+
+    const episodes = episodeData.map((episodes, index) => {
+      let boundItemClick = this.handleEpisodeClick.bind(this, episodes);
+
       return(
         <div key={index}>
           <span>
-            <h3>{episodes.name}</h3>
+            <h3 onClick={boundItemClick}>{episodes.name}</h3>
             <p>Episode Number: {episodes.episode_number}</p>
             <p>Air Date: {episodes.air_date}</p>
             <p>Overview: {episodes.overview ? episodes.overview : 'no overview provided'}</p>
@@ -19,7 +37,6 @@ class Episodes extends Component {
         </div>
       )
     })
-
     return(
       <div className="App">
         <header className="App-header">
@@ -32,6 +49,7 @@ class Episodes extends Component {
             </span>)
             : <h3>Nothing yet</h3>
           }
+          <EpisodeList episodeList={episodeArray} />
       </div>
     );
   }
@@ -39,5 +57,11 @@ class Episodes extends Component {
 
 export default Episodes;
 
-// sanity check
-// console.log('Episodes - props:', this.props);
+// --!
+// for ( let i = 0; i < episodeArray.length; i++ ) {
+//   if (episodeArray.indexOf(item.name) > -1) {
+//     console.log(`${item.name} already exists` );
+//     episodeArray.splice(episodeArray.indexOf(item.name), 1);
+//     localStorage.setItem('episodeList', JSON.stringify(episodeArray));
+//   }
+// }

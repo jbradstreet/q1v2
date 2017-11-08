@@ -7,11 +7,13 @@ import './index.css';
 import App from './components/App';
 import TvShows from './components/TvShows';
 import Episodes from './components/Episodes';
+import EpisodeList from './components/EpisodeList';
 import registerServiceWorker from './registerServiceWorker';
 // import NotFound from './components/NotFound';
 import Provider from './components/Provider';
 
 // stateless functional component
+// sub in manager in place of provider
 const Root = () => {
   return (
     <Router>
@@ -20,6 +22,7 @@ const Root = () => {
         {/* <Route  component={NotFound} /> */}
         <Route path="/TvShows/:tvShow" exact component={Provider} />
         <Route path="/episodes/:tvShow" exact component={Episodes} />
+        <Route path="/mylist" exact component={EpisodeList} />
       </div>
     </Router>
   );

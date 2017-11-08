@@ -40,12 +40,12 @@ TvShowPicker.propTypes = {
 export default withRouter(TvShowPicker);
 
 
+// --!
 // event = info being sent within `render()` on submit
 // event.preventDefault() = basic js, stops page from autorefresh on submit
 // ref = a way to reference the input data without touching the DOM
 // line 8 = was undefined, because 'this' is not automatically bound to the component in a method
   // instead of using a constructor, we can bind the goToEpisodes method to `this` on line 17 within `onSubmit`
-
 // state = an object that holds data. change it is a way to make a component re-render itself
 // props = an object allowing us to pass data between components
 // context (line 39) = allows to declare at top level and make that declaration available to children

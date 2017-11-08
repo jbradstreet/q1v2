@@ -3,15 +3,22 @@ import TvShowPicker from './TvShowPicker';
 import TvManager from './TvManager';
 import axios from 'axios';
 
+
+// define propTypes!
+// articles about this + react Lifecycle methods
 class Provider extends Component {
   constructor() {
     super();
 
+    // id being used as param not as state
     this.state = {
-      shows: []
+      shows: [],
+      episodes: [],
+      id: ''
     };
   }
 
+  // react invoked
   componentDidMount() {
     const { params } = this.props.match;
 
@@ -25,15 +32,23 @@ class Provider extends Component {
       })
   }
 
+  // user invoked
+  getEpisodes(id) {
+    axios.get(`https://api.themoviedb.org/3/tv/${id}/season/1?api_key=0b0d77f7b61147449b1f80d7026dd287&language=en-US`)
+    .then(response => {
+      this.setState({ episodes: response.data.episodes })
+      console.log('Provider - state:', this.state.episodes);
+    });
+  }
 
+  // tvmanager has a provider, provider should not have a tv manager
   render() {
     return (
       <div>
-        <TvManager data={this.state.shows} />
+        <TvManager showData={this.state.shows} episodeData={this.state.episodes} getEpisodesById={ (id) => this.getEpisodes(id) }/>
       </div>
     );
   }
-
 }
 
 export default Provider;
@@ -70,3 +85,8 @@ export default Provider;
 <Episodes
   data={this.state.episodes}
 /> */
+
+// --!
+// setTimeout(() => {
+//   this.setState({ episodes: response.data.episodes, loading: false });
+// }, 3000)
